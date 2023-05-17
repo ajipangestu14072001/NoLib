@@ -1,0 +1,16 @@
+package com.example.nolib.view
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.example.nolib.R
+import com.example.nolib.databinding.ActivityLoginBinding
+
+class LoginActivity : AppCompatActivity() {
+    lateinit var binding: ActivityLoginBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+    }
+}
