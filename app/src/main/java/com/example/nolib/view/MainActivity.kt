@@ -21,36 +21,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.btn.setOnClickListener {
-            thread {
-//                val response = HttpHelper.sendHttpRequest(Constant.BASE_URL + "user/2", "GET", null)
-//                runOnUiThread {
-//                    println("INI $response")
-//                }
-                val loginRequest = LoginRequest("eve.holt@reqres.in", "cityslicka")
-                val postData = JSONObject()
-                postData.put("email", loginRequest.email)
-                postData.put("password", loginRequest.password)
-                val response =
-                    HttpHelper.sendHttpRequest(Constant.BASE_URL + "login", "POST", postData, null)
-                runOnUiThread {
-                    val intent = Intent(applicationContext, MainActivity2::class.java)
-                    val sharedPref = getSharedPreferences("myKey", MODE_PRIVATE)
-                    val editor = sharedPref.edit()
-                    try {
-                        val jsonObject = JSONObject(response)
-                        val token = jsonObject.getString("token")
-                        editor.putString("token", token)
-                        println("Token: $token")
-                    } catch (e: JSONException) {
-                        println("Failed to parse token")
-                    }
-                    editor.apply()
-                    startActivity(intent)
-                    finish()
-                }
-            }
-        }
     }
 
 }
